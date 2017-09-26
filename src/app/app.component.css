@@ -1,0 +1,23 @@
+.app-container {
+    padding:2.5rem 0;
+}
+.app-title {
+    margin:1.5rem auto;
+}
+.justify-content-end {
+    margin-right:0;
+}
+.btn {
+    border-radius:0;
+    cursor:pointer;
+
+    -webkit-transition:all .15s ease-in-out;
+    -moz-transition:all .15s ease-in-out;
+    -ms-transition:all .15s ease-in-out;
+    -o-transition:all .15s ease-in-out;
+    transition:all .15s ease-in-out;
+}
+.btn:hover {
+    background-color:gray;
+    color:white;
+}

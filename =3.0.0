@@ -1,0 +1,4 @@
+ng-app2@0.0.0 /home/rikardo/bitnami/on4u/apps/ng-app2
+├── jquery@3.2.1 
+└── UNMET PEER DEPENDENCY popper.js@^1.11.0
+

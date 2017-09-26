@@ -1,0 +1,35 @@
+.btn,
+.form-control {
+  border-radius:0;
+}
+
+.modal-content {
+  border-radius:0;
+}
+.modal-header {
+  background:lightgray;
+}
+
+.fa {
+  cursor:pointer;
+  float:right;
+  margin-left:2.5px;
+}
+.fa:hover {
+  color:gray;
+}
+
+.products-table {
+  border:3px solid black;
+  margin-top:1.5rem;
+}
+.products-table td {
+  border-right:3px solid black;
+}
+.products-header,
+.product-item {
+  padding:.5rem;
+}
+.products-header {
+  border-bottom:2px solid black;
+}

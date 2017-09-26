@@ -1,16 +1,25 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { SearchProductsComponent } from './search-products/search-products.component';
+import { SearchProductsService } from './search-products.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchProductsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [SearchProductsService], // It is important,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
