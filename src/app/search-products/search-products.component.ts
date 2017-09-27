@@ -9,13 +9,13 @@ import { SearchProductsService } from '../search-products.service';
   styleUrls: ['./search-products.component.css']
 })
 export class SearchProductsComponent implements OnInit {
-  place: string;
-  language: string;
 
   results: any[] = []; // This will hold the data coming from the service
   selected: boolean = false; // Flag to check if a user is clicked or not
   selectedUser: any; // presently Selected user details
   error_text: string = ""; // So called error reporing text to the end user
+  orderby: string = "id";
+  order: string = "desc";
 
   newProductForm: FormGroup;
   delProductForm: FormGroup;
@@ -37,11 +37,12 @@ export class SearchProductsComponent implements OnInit {
     this.searchAll();
   }
 
-  /* RK */
   searchAll() {
     this.searchService.getAllProducts().subscribe(
       products => {
+        console.log("[searchAll] products: " + products);
         this.results = products;
+        this.sort(this.orderby, this.order);
       },
       error => {
         this.results = [];
@@ -50,33 +51,19 @@ export class SearchProductsComponent implements OnInit {
       }
     )
   }
-  private kakakulo() {
-    this.searchAllOrderBy('sku', 'desc');
-  }
-  searchAllOrderBy(orderby:string, order: string) {
-    this.searchService.getAllProductsOrderBy(orderby, order).subscribe(
-      products => {
-        this.results = products;
-      },
-      error => {
-        this.results = [];
-        this.error_text = "No se han encontrado productos. Inténtelo de nuevo";
-        console.error(error);
-      }
-    )
-  }
-
-  /* RK */
-  addProduct(post) { 
-    console.log(post); 
-  }
-
-  /* RK */
+ 
   private newItem(form) {
     this.searchService.newProduct(form.sku, form.name, form.price).subscribe(
       products => {
-        console.log(products);
-        // this.results = products;
+        console.log("[newItem] products: " + products);
+
+        this.orderby = 'id';
+        this.order = 'desc';
+
+        this.newProductForm.setValue({id: null, sku: null, name : null, price: null});
+
+        this.results = products;
+        this.sort(this.orderby, this.order);
       },
       error => {
         this.results = [];
@@ -84,18 +71,17 @@ export class SearchProductsComponent implements OnInit {
         console.error(error);
       }
     );
-    this.searchAll();
   }
 
-  /* RK */
   private sendIdToModalEdit(id: number, sku: string, name: string, price: number) {
     this.editProductForm.setValue({id: id, sku: sku, name: name, price: price});
   }
   private updateItem(form) {
     this.searchService.updateProduct(form.id, form.sku, form.name, form.price).subscribe(
       products => {
-        console.log(products);
-        // this.results = products;
+        console.log("[updateItem] products: " + products);
+        this.results = products;
+        this.sort(this.orderby, this.order);
       },
       error => {
         this.results = [];
@@ -103,58 +89,80 @@ export class SearchProductsComponent implements OnInit {
         console.error(error);
       }
     );
-    this.searchAll();
   }
 
-  /* RK */
   private sendIdToModalDelete(id: number) {
     this.delProductForm.setValue({id: id});
   }
   private delItem(id: number) {
     this.searchService.delProduct(id).subscribe(
       products => {
-        console.log(products);
+        console.log("[delItem] products: " + products);
         this.results = products;
+        this.sort(this.orderby, this.order);
       },
       error => {
         this.results = [];
         this.error_text = "Error al borrar producto";
-        // console.error(error);
+        console.error(error);
       }
     );
-    this.searchAll();
   }
-  
-  
-  search(place: string, language: string) {
-    this.selected = false;
-    this.error_text = "";
-    if (place || language) {
-      this.place = place;
-      this.language = language;
-      this.searchService.getUsersByPlaceAndLanguage(place, language).subscribe(
-        users => {
-          this.results = users;
-        },
-        error => {
-          this.results = [];
-          this.error_text = "Sorry! No Users found. Try again";
-          console.error(error);
-        }
-      )
+
+  sort(orderby: string, order: string) {
+    if("asc" === order)
+      this.sortDesc(orderby);
+    else
+      this.sortAsc(orderby);
+
+    this.orderby = orderby;
+    this.order = order;
+  }
+
+  private sortDesc(orderby: string) {
+    switch(orderby) {
+      case "sku":
+        this.results = this.results.sort((n1,n2) => {
+          if(n2.sku.toUpperCase() > n1.sku.toUpperCase()) return 1;
+          if(n2.sku.toUpperCase() < n1.sku.toUpperCase()) return -1;
+          return 0;
+        });
+        break;
+      case "name":
+        this.results = this.results.sort((n1,n2) => {
+          if(n2.name.toUpperCase() > n1.name.toUpperCase()) return 1;
+          if(n2.name.toUpperCase() < n1.name.toUpperCase()) return -1;
+          return 0;
+        });
+        break;
+      case "price":
+        this.results = this.results.sort((n1,n2) => n2.price - n1.price);
+        break;
     }
   }
 
-  getDetails(username: string) {
-    this.searchService.getDetailsByUserName(username).subscribe(
-      userDatils => {
-        this.selectedUser = userDatils;
-        this.selected = true;
-      },
-      error => {
-        this.selected = false;
-        console.error(error);
-      }
-    )
-}
+  private sortAsc(orderby: string) {
+    switch(orderby) {
+      case "sku":
+        this.results = this.results.sort((n1,n2) => {
+          if(n2.sku.toUpperCase() < n1.sku.toUpperCase()) return 1;
+          if(n2.sku.toUpperCase() > n1.sku.toUpperCase()) return -1;
+          return 0;
+        });
+        break;
+      case "name":
+      this.results = this.results.sort((n1,n2) => {
+        if(n2.name.toUpperCase() < n1.name.toUpperCase()) return 1;
+        if(n2.name.toUpperCase() > n1.name.toUpperCase()) return -1;
+        return 0;
+      });
+        break;
+      case "price":
+        this.results = this.results.sort((n1,n2) => n1.price - n2.price);
+        break;
+    }
+    this.orderby = orderby;
+    this.order = "asc";
+  }
+
 }

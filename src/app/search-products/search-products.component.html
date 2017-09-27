@@ -2,9 +2,9 @@
       <thead>
         <tr class="products-header">
           <td class="sr-only">ID</td>
-          <td class="text-left">SKU<a class="fa fa-caret-down" aria-hidden="true" (click) = "searchAllOrderBy('sku','desc')"></a><i class="fa fa-caret-up" aria-hidden="true" (click) = "searchAllOrderBy('sku','asc')"></i></td>
-          <td class="text-left">Name<i class="fa fa-caret-down" aria-hidden="true" (click) = "searchAllOrderBy('name','desc')"></i><i class="fa fa-caret-up" aria-hidden="true" (click) = "searchAllOrderBy('name','asc')"></i></td>
-          <td class="text-left">Price<i class="fa fa-caret-down" aria-hidden="true" (click) = "searchAllOrderBy('price','desc')"></i><i class="fa fa-caret-up" aria-hidden="true" (click) = "searchAllOrderBy('price','asc')"></i></td>
+          <td class="text-left">SKU<a class="fa fa-caret-down" aria-hidden="true" (click) = "sort('sku', 'desc')"></a><i class="fa fa-caret-up" aria-hidden="true" (click) = "sort('sku', 'asc')"></i></td>
+          <td class="text-left">Name<i class="fa fa-caret-down" aria-hidden="true" (click) = "sort('name', 'desc')"></i><i class="fa fa-caret-up" aria-hidden="true" (click) = "sort('name', 'asc')"></i></td>
+          <td class="text-left">Price<i class="fa fa-caret-down" aria-hidden="true" (click) = "sort('price', 'desc')"></i><i class="fa fa-caret-up" aria-hidden="true" (click) = "sort('price', 'asc')"></i></td>
           <td class="text-right">Actions</td>
         </tr>
       </thead>
@@ -41,17 +41,17 @@
                     <label class="col-12">SKU:
                       <input type="text" placeholder="SKU" class="form-control input-lg input" formControlName="sku" required #sku />
                       <!-- This goes underneath the SKU label -->
-                      <div class="alert" *ngIf="!newProductForm.controls['sku'].valid && newProductForm.controls['sku'].touched">{{ titleAlert }}</div>
+                      <!-- <div class="alert" *ngIf="!newProductForm.controls['sku'].valid && newProductForm.controls['sku'].touched">{{ titleAlert }}</div> -->
                     </label>
                     <label class="col-12">Name:
                       <input type="text" placeholder="Name" class="form-control input-lg input" formControlName="name" required #name />
                       <!-- This goes underneath the Name label -->
-                      <div class="alert" *ngIf="!newProductForm.controls['name'].valid && newProductForm.controls['name'].touched">{{ titleAlert }}</div>
+                      <!-- <div class="alert" *ngIf="!newProductForm.controls['name'].valid && newProductForm.controls['name'].touched">{{ titleAlert }}</div> -->
                     </label>
                     <label class="col-12">Price:
                       <input type="number" min="0" value="0.00" placeholder="Price" class="form-control input-lg input" formControlName="price" required #price />
                       <!-- This goes underneath the Price label -->
-                      <div class="alert" *ngIf="!newProductForm.controls['price'].valid && newProductForm.controls['price'].touched">{{ titleAlert }}</div>
+                      <!-- <div class="alert" *ngIf="!newProductForm.controls['price'].valid && newProductForm.controls['price'].touched">{{ titleAlert }}</div> -->
                     </label>
                 </div>
               </div>
@@ -136,55 +136,3 @@
       </div>
     </div>
   </div> 
-
-
-
-  <!-- <div class="row">
-    <div class="col-md-12 col-md-offset-3">
-      <div class="form-inline">
-        <input placeholder="Location Name" class="form-control input-lg input" #place (keyup.enter)="search(place.value, language.value); place.value=''; language.value='';" />
-        <input placeholder="Language e.g. Java" class="form-control input-lg input" #language (keyup.enter)="search(place.value, language.value); place.value=''; language.value='';" />
-        <button class="btn btn-primary btn-lg" (click)="search(place.value, language.value); place.value=''; language.value='';">Search</button>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <p class="text-center" style="padding: 1em; color:red;" *ngIf="error_text">{{ error_text }}</p>
-    <div [ngClass]="{'col-md-9': selected, 'col-md-12': !selected}">
-      <div class="user col-md-2 text-center" *ngFor="let user of results" (click)="getDetails(user.login)">
-        <div class="img_container">
-          <img src="{{user.avatar_url}}" class="img-circle" width="100" height="100">
-        </div>
-        <div class="details_container">
-          <a href="{{user.html_url}}" target="_blank" class="login_name">{{ user.login }}</a>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="results.length && selected" class="col-md-3">
-
-      <div class="box text-center">
-        <img src="{{selectedUser.avatar_url}}" class="img-responsive img-circle">
-        <div class="details">
-          <div *ngIf="selectedUser.name"><a href="{{ selectedUser.html_url }}" target="_blank"><h3>{{ selectedUser.name }} </h3></a></div>
-          <hr>
-          <div *ngIf="selectedUser.email">Email: {{ selectedUser.email }}</div>
-          <hr>
-          <div *ngIf="selectedUser.location">Location: {{ selectedUser.location }}</div>
-          <hr>
-          <div *ngIf="selectedUser.bio">Bio: {{ selectedUser.bio }}</div>
-          <hr>
-          <div *ngIf="selectedUser.updated_at">Last Seen: {{ selectedUser.updated_at | date }}</div>
-          <hr>
-          <div *ngIf="selectedUser.public_repos">Repos: {{ selectedUser.public_repos }}</div>
-          <hr>
-          <div *ngIf="selectedUser.public_gists">Gists: {{ selectedUser.public_gists }}</div>
-          <hr>
-          <div *ngIf="selectedUser.followers">Followers: {{ selectedUser.followers }}</div>
-          <hr>
-          <div *ngIf="selectedUser.created_at">Joined github: {{ selectedUser.created_at | date }}</div>
-          <hr>
-          <button class="btn btn-sm btn-warning" (click)="selected = !selected">Back</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
