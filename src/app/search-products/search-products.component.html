@@ -2,21 +2,21 @@
       <thead>
         <tr class="products-header">
           <td class="sr-only">ID</td>
-          <td class="text-left">SKU<a class="fa fa-caret-down" aria-hidden="true" (click) = "sort('sku', 'desc')"></a><i class="fa fa-caret-up" aria-hidden="true" (click) = "sort('sku', 'asc')"></i></td>
-          <td class="text-left">Name<i class="fa fa-caret-down" aria-hidden="true" (click) = "sort('name', 'desc')"></i><i class="fa fa-caret-up" aria-hidden="true" (click) = "sort('name', 'asc')"></i></td>
-          <td class="text-left">Price<i class="fa fa-caret-down" aria-hidden="true" (click) = "sort('price', 'desc')"></i><i class="fa fa-caret-up" aria-hidden="true" (click) = "sort('price', 'asc')"></i></td>
+          <td class="text-left">SKU<a class="fa fa-caret-down" title="Descending order by SKU" aria-hidden="true" (click) = "sort('sku', 'desc')"></a><i class="fa fa-caret-up" title="Ascending order by SKU" aria-hidden="true" (click) = "sort('sku', 'asc')"></i></td>
+          <td class="text-left">Name<i class="fa fa-caret-down" title="Descending order by Name" aria-hidden="true" (click) = "sort('name', 'desc')"></i><i class="fa fa-caret-up" title="Ascending order by Name" aria-hidden="true" (click) = "sort('name', 'asc')"></i></td>
+          <td class="text-left">Price<i class="fa fa-caret-down" title="Descending order by Price" aria-hidden="true" (click) = "sort('price', 'desc')"></i><i class="fa fa-caret-up" title="Ascending order by Price" aria-hidden="true" (click) = "sort('price', 'asc')"></i></td>
           <td class="text-right">Actions</td>
         </tr>
       </thead>
       <tbody>
-        <tr class="product-item" *ngFor="let product of results">
+        <tr class="product-item" title="{{ product.sku }} - {{ product.name }} ({{ product.price }}&euro;)" *ngFor="let product of results">
           <td class="id sr-only">{{ product.id }}</td>
           <td class="sku">{{ product.sku }}</td>
           <td class="name">{{ product.name }}</td>
           <td class="price text-right">{{ product.price }}</td>
           <td class="actions text-right">
-            <a href="#" (click) = "sendIdToModalEdit(product.id, product.sku, product.name, product.price)"  data-toggle="modal" data-target="#editProductModal">Edit</a> - 
-            <a href="#" (click) = "sendIdToModalDelete(product.id)" data-toggle="modal" data-target="#delProductModal">Delete</a>
+            <a href="#" title="Edit {{ product.name }}" (click) = "sendIdToModalEdit(product.id, product.sku, product.name, product.price)"  data-toggle="modal" data-target="#editProductModal">Edit</a> - 
+            <a href="#" title="Delete {{ product.name }}" (click) = "sendIdToModalDelete(product.id)" data-toggle="modal" data-target="#delProductModal">Delete</a>
           </td>
         </tr>
       </tbody>
@@ -37,19 +37,19 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-inline3 row">
-                    <input type="hidden" placeholder="id" class="form-control input-lg input col-12" #id />
+                    <input type="hidden" placeholder="id" value="" class="form-control input-lg input col-12" #id />
                     <label class="col-12">SKU:
-                      <input type="text" placeholder="SKU" class="form-control input-lg input" formControlName="sku" required #sku />
+                      <input type="text" placeholder="SKU" value="" class="form-control input-lg input" formControlName="sku" required #sku />
                       <!-- This goes underneath the SKU label -->
                       <!-- <div class="alert" *ngIf="!newProductForm.controls['sku'].valid && newProductForm.controls['sku'].touched">{{ titleAlert }}</div> -->
                     </label>
                     <label class="col-12">Name:
-                      <input type="text" placeholder="Name" class="form-control input-lg input" formControlName="name" required #name />
+                      <input type="text" placeholder="Name" value="" class="form-control input-lg input" formControlName="name" required #name />
                       <!-- This goes underneath the Name label -->
                       <!-- <div class="alert" *ngIf="!newProductForm.controls['name'].valid && newProductForm.controls['name'].touched">{{ titleAlert }}</div> -->
                     </label>
                     <label class="col-12">Price:
-                      <input type="number" min="0" value="0.00" placeholder="Price" class="form-control input-lg input" formControlName="price" required #price />
+                      <input type="number" min="0.00" value="0.00" step="1.00" placeholder="0.00" class="form-control input-lg input" formControlName="price" required #price />
                       <!-- This goes underneath the Price label -->
                       <!-- <div class="alert" *ngIf="!newProductForm.controls['price'].valid && newProductForm.controls['price'].touched">{{ titleAlert }}</div> -->
                     </label>
@@ -93,7 +93,7 @@
                         <!-- <div class="alert" *ngIf="!newProductForm.controls['name'].valid && newProductForm.controls['name'].touched">{{ titleAlert }}</div> -->
                       </label>
                       <label class="col-12">Price:
-                        <input type="number" min="0" value="0.00" placeholder="Price" class="form-control input-lg input" formControlName="price" required [formControl]="editProductForm.controls['price']" #price />
+                        <input type="number" min="0.00" value="0.00" step="1.00" placeholder="0.00" class="form-control input-lg input" formControlName="price" required [formControl]="editProductForm.controls['price']" #price />
                         <!-- This goes underneath the Price label -->
                         <!-- <div class="alert" *ngIf="!newProductForm.controls['price'].valid && newProductForm.controls['price'].touched">{{ titleAlert }}</div> -->
                       </label>
@@ -103,7 +103,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" data-dismiss="modal" (click) = "updateItem(editProductForm.value); sku.value=''; name.value=''; price.value='';" [disabled]="!editProductForm.valid">Save changes</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal" (click) = "updateItem(editProductForm.value); id.value=''; sku.value=''; name.value=''; price.value='';" [disabled]="!editProductForm.valid">Save changes</button>
             </div>
           </form>
         </div>

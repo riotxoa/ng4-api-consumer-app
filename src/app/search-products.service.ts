@@ -22,7 +22,7 @@ export class SearchProductsService {
       .catch(this.handleError);
   }
 
-  newProduct(sku: string, name: string, price: number) {
+  newProduct(sku: string, name: string, price: string) {
     let url = `${this.searchProductsEndPoint}product?sku=${sku}&name=${name}&price=${price}`;
     let body = ``;
 
@@ -31,7 +31,7 @@ export class SearchProductsService {
     .catch(this.handleError);
   }
 
-  updateProduct(id: number, sku: string, name: string, price: number) {
+  updateProduct(id: number, sku: string, name: string, price: string) {
     let url = `${this.searchProductsEndPoint}product/update?id=${id}&sku=${sku}&name=${name}&price=${price}`;
     let body = ``;
 

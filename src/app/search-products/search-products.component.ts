@@ -25,14 +25,19 @@ export class SearchProductsComponent implements OnInit {
   ngOnInit() {
     this.newProductForm = new FormGroup({
       'id' : new FormControl(null),
-      'sku': new FormControl(null, [Validators.required, Validators.minLength(2),]),
-      'name': new FormControl(null, [Validators.required, Validators.minLength(2),]),
-      'price' : new FormControl(null, [Validators.required, Validators.min(0)])  
+      'sku': new FormControl(null, [Validators.required, Validators.minLength(1),]),
+      'name': new FormControl(null, [Validators.required, Validators.minLength(1),]),
+      'price' : new FormControl(null, [Validators.required, Validators.minLength(1)])  
     });
     this.delProductForm = new FormGroup({
       'id' : new FormControl(null)
     });
-    this.editProductForm = this.newProductForm;
+    this.editProductForm = new FormGroup({
+      'id' : new FormControl(null),
+      'sku': new FormControl(null, [Validators.required, Validators.minLength(1),]),
+      'name': new FormControl(null, [Validators.required, Validators.minLength(1),]),
+      'price' : new FormControl(null, [Validators.required, Validators.minLength(1)])  
+    });
 
     this.searchAll();
   }
