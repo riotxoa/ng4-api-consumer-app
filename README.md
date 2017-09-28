@@ -27,6 +27,7 @@ Desde su línea de comandos, sitúese en la ruta o directorio donde desee inicia
 Desde su línea de comandos, sitúese en la ruta o directorio donde ha clonado el código del repositorio (ng4-api-consumer-app) y ejecutar el siguiente comando:
 
 * ng serve
+* Abrir en un navegador la URL http://localhost:4200 (o el número de puerto que aparezca en la consola)
 
 
 --------------------------------------------------------
