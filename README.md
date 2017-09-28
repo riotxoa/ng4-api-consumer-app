@@ -12,21 +12,21 @@ Aplicación en Angular 4 que implementa un CRUD básico sobre una tabla de produ
 Desde su línea de comandos, sitúese en la ruta o directorio donde desee iniciar la instalación y siga los siguientes pasos:
 1. Clonar el repositorio donde se encuentra el código:
 
-    git clone https://github.com/riotxoa/ng4-api-consumer-app.git
+   * git clone https://github.com/riotxoa/ng4-api-consumer-app.git
 
 2. Situarse en la nueva ruta creada:
 
-    cd ng4-api-consumer-app
+   * cd ng4-api-consumer-app
 
 3. Instalar dependencias:
 
-    npm install
+   * npm install
 
 # Ejecución de la Aplicación
 
 Desde su línea de comandos, sitúese en la ruta o directorio donde ha clonado el código del repositorio (ng4-api-consumer-app) y ejecutar el siguiente comando:
 
-    ng serve
+* ng serve
 
 
 --------------------------------------------------------
