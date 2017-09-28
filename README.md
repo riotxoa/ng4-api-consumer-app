@@ -4,11 +4,11 @@ Aplicación en Angular 4 que implementa un CRUD básico sobre una tabla de produ
 
 # Instalación
 
-## Requisitos previos
-* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-* [npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm)
+  ## Requisitos previos
+     * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+     * [npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm)
 
-## Proceso de instalación
+  ## Proceso de instalación
 Desde su línea de comandos, sitúese en la ruta o directorio donde desee iniciar la instalación y siga los siguientes pasos:
 1. Clonar el repositorio donde se encuentra el código:
 
@@ -22,7 +22,7 @@ Desde su línea de comandos, sitúese en la ruta o directorio donde desee inicia
 
    * npm install
 
-# Ejecución de la Aplicación
+  # Ejecución de la Aplicación
 
 Desde su línea de comandos, sitúese en la ruta o directorio donde ha clonado el código del repositorio (ng4-api-consumer-app) y ejecutar el siguiente comando:
 
